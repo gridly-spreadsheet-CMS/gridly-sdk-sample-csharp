@@ -16,10 +16,7 @@ namespace gridly_csharp_sample
         static void Main(string[] args)
         {
             Console.WriteLine("Start SDK!");
-            Configuration config = new Configuration();
-            config.AddApiKey("confidential_key", apiKeyValue.ToString());
-            config.DateTimeFormat = DateTime.Now.ToString();
-            config.AddDefaultHeader("Authorization", $"ApiKey {config.ApiKey["confidential_key"]}");
+            Configuration.Default.AddApiKey("Authorization", $"ApiKey {apiKeyValue}");
             // Create a list of records 
             var cell1 = new List<SetCell>()
             {
@@ -48,7 +45,7 @@ namespace gridly_csharp_sample
                 new SetRecord(cell2,"STR_INSTRUCTIONS"),
                 new SetRecord(cell3,"STR_OTHER_FEATURES")
             };
-            var recordApi = new RecordApi(config);
+            var recordApi = new RecordApi();
             recordApi.Create(viewId, lstNewRecords);
             printAllRecordsToConsole(lstNewRecords);
             // Update existing records
